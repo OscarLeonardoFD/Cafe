@@ -35,8 +35,9 @@
         android:layout_height="65dp"
         android:layout_marginBottom="304dp"
         android:ems="10"
-        android:inputType="textPassword"
+        android:hint="textPassword"
         android:text="contraseña"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.389"
@@ -77,6 +78,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_below="@id/editcontraseña"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

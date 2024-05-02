@@ -1,74 +1,49 @@
 package com.example.cafe
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.firestore.FirebaseFirestore
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+
 
 
 
 class formulario : AppCompatActivity() {
 
-    val db = FirebaseFirestore.getInstance()
-    private lateinit var formulario : formulario
-    val button = findViewById<Button>(R.id.bcrear)
-    val editnombre = findViewById<EditText>(R.id.editnombre)
-    val editcontraseña = findViewById<EditText>(R.id.editcontraseña)
-    val edittelefono = findViewById<EditText>(R.id.edittelefono)
-    val editcorreo = findViewById<EditText>(R.id.editcorreo)
-
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        formulario = formulario.inflate(layoutInflater)
-
         setContentView(R.layout.activity_formulario)
 
+        mAuth = FirebaseAuth.getInstance()
 
-        val analytics = FirebaseAnalytics.getInstance(this)
-        val bundle = Bundle()
-        bundle.putString("message","comenzando app")
-        analytics.logEvent("formulario",bundle)
+        val emailEditText = findViewById<EditText>(R.id.editcorreo)
+        val passwordEditText = findViewById<EditText>(R.id.editcontraseña)
+        val nombreEditText = findViewById<EditText>(R.id.editnombre)
+        val telefonoEditText = findViewById<EditText>(R.id.edittelefono)
+        val registerButton = findViewById<Button>(R.id.bcrear)
 
-       formulario.button.setOnClickListener {
-           val user = hashMapOf(
-           "first" to formulario.editnombre.text.toString(),
-           "last" to formulario.editcontraseña.text.toString(),
-               "last" to formulario.edittelefono.text.toString(),
-           "last" to formulario.editcorreo.text.toString()
+        registerButton.setOnClickListener {
+            val email = emailEditText.text.toString()
+            val password = passwordEditText.text.toString()
+            val nombre = nombreEditText.text.toString()
+            val telefono = telefonoEditText.text.toString()
 
-           )
-           db.collection("usuarios")
-               .add(user)
-               .addOnSuccessListener { documentReference ->
-                   Log.d("TAG",documentReference.id )
-
-               }
-               .addOnFailureListener{e->
-                   Log.w("TAG", "error $e")
-
-               }
-
-
-       }
-
-
-
+            mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Registro exitoso
+                        Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Fallo en el registro
+                        Toast.makeText(this, "Error en el registro: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
-
-
-
-
-
-
     }
-
-
-
-
-
+}
 
 
