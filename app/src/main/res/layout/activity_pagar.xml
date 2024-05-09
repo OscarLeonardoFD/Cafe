@@ -10,7 +10,7 @@
         android:id="@+id/texttelefono"
         android:layout_width="376dp"
         android:layout_height="49dp"
-        android:text=""
+        android:text="El monto a pagar es de "
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
