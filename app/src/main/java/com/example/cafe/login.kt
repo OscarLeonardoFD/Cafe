@@ -1,5 +1,6 @@
 package com.example.cafe
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -29,7 +30,8 @@ class login : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Inicio de sesión exitoso
                         Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-                        // Aquí puedes redirigir a otra actividad o realizar otras acciones después del inicio de sesión exitoso
+                        val intent = Intent (this, Variedades::class.java)
+                        startActivity(intent)
                     } else {
                         // Fallo en el inicio de sesión
                         Toast.makeText(this, "Error en el inicio de sesión: ${task.exception?.message}", Toast.LENGTH_SHORT).show()

@@ -32,7 +32,7 @@ class formulario : AppCompatActivity() {
             val nombre = nombreEditText.text.toString()
             val telefono = telefonoEditText.text.toString()
 
-            mAuth.createUserWithEmailAndPassword(email, password)
+            mAuth.createUserWithEmailAndPassword(email, password, )
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Registro exitoso
