@@ -1,5 +1,6 @@
 package com.example.cafe
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -49,22 +50,25 @@ class formulario : AppCompatActivity() {
                             userRef.setValue(userData)
                                 .addOnSuccessListener {
 
-                                    // Puedes mostrar un mensaje o realizar alguna acción adicional aquí
+                                    Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                                    val intent = Intent(this, login::class.java)
+                                    startActivity(intent)
+                                    finish()
                                 }
                                 .addOnFailureListener {
 
-                                    // Puedes manejar el error aquí
+
                                 }
                         }
 
-                        // Puedes realizar alguna acción adicional después de registrar al usuario
+
                     } else {
-                        // Fallo en el registro de usuario
-                        // Puedes manejar el fallo aquí
+                        Toast.makeText(this, "Registro  fallido", Toast.LENGTH_SHORT).show()
+                    }
                     }
                 }
         }
     }
-}
+
 
 
